@@ -10,8 +10,14 @@ import { NotFound } from './components/NotFound'
 // to show what's possible with the current APIs.
 
 export function createRouter() {
-  const queryClient = new QueryClient()
-
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        staleTime: 1000 * 60, // 1 minute
+      },
+    },
+  });
   return routerWithQueryClient(
     createTanStackRouter({
       routeTree,
